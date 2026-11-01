@@ -19,8 +19,8 @@ const display = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "INARCH — Architecture & Construction",
-    template: "%s — INARCH",
+    default: "INARCH - Architecture & Construction",
+    template: "%s - INARCH",
   },
   description:
     "INARCH is an architecture and construction studio.",
