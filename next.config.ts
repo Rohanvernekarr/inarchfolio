@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
+    resolveAlias: {
+      three: "./lib/three-compat.mjs",
+    },
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],

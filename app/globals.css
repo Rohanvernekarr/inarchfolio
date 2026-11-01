@@ -1,26 +1,176 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-obsidian: #0a0a0a;
+  --color-concrete: #202020;
+  --color-stone: #b7b0a5;
+  --color-brass: #d6b77a;
+  --color-ivory: #ebe6dc;
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #0a0a0a;
+  scroll-behavior: auto;
+}
+
+#studio,
+#services,
+#work,
+#contact {
+  scroll-margin-top: 4.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a0a0a;
+  color: #ebe6dc;
+  font-family: var(--font-inter), sans-serif;
+}
+
+::selection {
+  background: #d6b77a;
+  color: #0a0a0a;
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(214, 183, 122, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 183, 122, 0.14) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-reverse {
+  animation: marquee-reverse 36s linear infinite;
+}
+
+.page-sheet {
+  transform-origin: center top;
+  box-shadow: 0 -16px 28px rgba(0, 0, 0, 0.28);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+.contact-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.45rem;
+}
+
+.contact-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: #e10600;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-link:hover::after,
+.contact-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.page-veil {
+  opacity: 0;
+}
+
+.hero-step .step-title {
+  color: #8c867c;
+  transition: color 0.45s ease;
+}
+
+.hero-step.is-on .step-title {
+  color: #ebe6dc;
+}
+
+.hero-step.is-current .step-title {
+  color: #d6b77a;
+}
+
+.hero-step.is-current .step-note {
+  color: #ebe6dc;
+}
+
+.service-panel {
+  transition: background-color 0.45s ease;
+}
+
+.service-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: #e10600;
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-panel:hover {
+  background: #121212;
+}
+
+.service-panel:hover::before {
+  transform: scaleY(1);
+}
+
+.service-num {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s ease;
+}
+
+.service-panel:hover .service-num {
+  color: rgba(225, 6, 0, 0.42);
+  transform: translate3d(-2vw, -1vh, 0);
+}
+
+.service-panel h2 {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-panel:hover h2 {
+  transform: translateX(10px);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .marquee-reverse {
+    animation: none;
+  }
 }
