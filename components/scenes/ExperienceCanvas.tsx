@@ -7,9 +7,11 @@ import { scene, subscribeSceneVisible, syncScene } from "@/lib/scene";
 import { Building } from "@/components/scenes/Building";
 
 function CameraRig() {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
+  const mobile = size.width < 768;
   const look = useRef(new THREE.Vector3(0, 1.6, 0));
   const target = useRef(new THREE.Vector3(-14, 7.2, 11));
+
 
   useFrame(() => {
     syncScene();
@@ -42,6 +44,7 @@ function CameraRig() {
       lookY = 1.8;
     }
 
+    if (mobile) radius *= 1.18;
     target.current.set(Math.sin(angle) * radius, height, Math.cos(angle) * radius);
     look.current.set(0, lookY, 0);
     camera.position.lerp(target.current, 0.22);
@@ -54,7 +57,7 @@ function CameraRig() {
 function Lights() {
   return (
     <>
-      <color attach="background" args={["#0a0a0a"]} />
+
       <fog attach="fog" args={["#0a0a0a", 22, 48]} />
       <ambientLight intensity={0.18} />
       <hemisphereLight args={["#d9d0c2", "#0a0a0a", 0.45]} />
@@ -72,11 +75,12 @@ function Lights() {
 }
 
 function readQuality() {
-  if (typeof window === "undefined") return { dpr: 1, shadows: false };
+  if (typeof window === "undefined") return { dpr: 1, shadows: false, mobile: false };
   const mobile = window.matchMedia("(max-width: 768px)").matches;
   return {
-    dpr: mobile ? 1 : Math.min(window.devicePixelRatio, 1.25),
+    dpr: mobile ? Math.min(window.devicePixelRatio, 1.35) : Math.min(window.devicePixelRatio, 1.25),
     shadows: !mobile,
+    mobile,
   };
 }
 
@@ -91,10 +95,10 @@ export default function ExperienceCanvas() {
       frameloop={live ? "always" : "never"}
       dpr={quality.dpr}
       shadows={quality.shadows ? "percentage" : false}
-      camera={{ position: [-14.6, 7.2, 10.5], fov: 30, near: 0.1, far: 120 }}
-      gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
+      camera={{ position: [-14.6, 7.2, 10.5], fov: quality.mobile ? 48 : 30, near: 0.1, far: 120 }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onCreated={({ gl }) => {
-        gl.setClearColor("#0a0a0a");
+        gl.setClearColor("#0a0a0a", 0);
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 1.12;
       }}

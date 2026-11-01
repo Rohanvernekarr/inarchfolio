@@ -44,7 +44,7 @@ export function syncScene() {
   scene.solid = Math.min(1, scene.reveal);
 
   if (scene.mode === "assembly") {
-    scene.wire = 0.34 + (0.06 - 0.34) * scene.t;
+    scene.wire = 0.18 + (0.03 - 0.18) * scene.t;
     scene.explode = scene.t;
     return;
   }
@@ -56,6 +56,6 @@ export function syncScene() {
   }
 
   const reveal = Math.max(scene.reveal, scene.t);
-  scene.wire = 0.95 + (0.3 - 0.95) * reveal;
+  scene.wire = 0.8 + (0.18 - 0.8) * reveal;
   scene.explode = 0;
 }

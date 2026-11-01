@@ -17,13 +17,14 @@ const display = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
+
 export const metadata: Metadata = {
   title: {
-    default: "INARCH - Architecture & Construction",
-    template: "%s - INARCH",
+    default: "InArch Structures & Studio | Architecture, Structures & Interiors",
+    template: "%s | InArch Structures & Studio",
   },
   description:
-    "INARCH is an architecture and construction studio.",
+    "InArch Structures & Studio brings architectural planning, structural design and thoughtful interiors together. Designing Spaces. Engineering Possibilities.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

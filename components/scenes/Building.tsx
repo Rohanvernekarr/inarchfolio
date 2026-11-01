@@ -2,10 +2,8 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import gsap from "gsap";
 import * as THREE from "three";
 import { scene, syncScene } from "@/lib/scene";
-import { prefersReducedMotion } from "@/lib/animation";
 
 function MaterialBox({
   w,
@@ -40,11 +38,14 @@ function MaterialBox({
           roughness={roughness}
           transparent={opacity < 1}
           opacity={opacity}
+          polygonOffset
+          polygonOffsetFactor={1}
+          polygonOffsetUnits={1}
         />
       </mesh>
       {edges ? (
         <lineSegments geometry={edgeGeometry} userData={{ kind: "wire" }}>
-          <lineBasicMaterial color="#d6b77a" transparent opacity={0.75} />
+          <lineBasicMaterial color="#d6b77a" transparent opacity={0.75} depthWrite={false} />
         </lineSegments>
       ) : null}
     </group>
@@ -218,13 +219,13 @@ function Upper() {
 function Roof() {
   return (
     <group>
-      <MaterialBox w={7.1} h={0.1} d={6.1} position={[0, 0.05, 0]} color="#f4ead8" />
-      <MaterialBox w={7.1} h={0.08} d={0.22} position={[0, 0.08, 2.95]} color="#7d3d2e" />
-      <MaterialBox w={7.1} h={0.18} d={0.12} position={[0, 0.2, 3.02]} color="#efe4d0" />
-      <MaterialBox w={7.1} h={0.18} d={0.12} position={[0, 0.2, -3.02]} color="#efe4d0" />
-      <MaterialBox w={0.12} h={0.18} d={5.9} position={[-3.5, 0.2, 0]} color="#efe4d0" />
-      <MaterialBox w={0.12} h={0.18} d={5.9} position={[3.5, 0.2, 0]} color="#efe4d0" />
-      <MaterialBox w={1.15} h={0.4} d={1} position={[-1.3, 0.32, -0.8]} color="#c4a36a" />
+      <MaterialBox w={7.1} h={0.1} d={6.1} position={[0, 0.05, 0]} color="#f4ead8" edges={false} />
+      <MaterialBox w={7.1} h={0.08} d={0.22} position={[0, 0.12, 2.95]} color="#7d3d2e" edges={false} />
+      <MaterialBox w={7.1} h={0.18} d={0.12} position={[0, 0.25, 3.02]} color="#efe4d0" edges={false} />
+      <MaterialBox w={7.1} h={0.18} d={0.12} position={[0, 0.25, -3.02]} color="#efe4d0" edges={false} />
+      <MaterialBox w={0.12} h={0.18} d={5.92} position={[-3.49, 0.25, 0]} color="#efe4d0" edges={false} />
+      <MaterialBox w={0.12} h={0.18} d={5.92} position={[3.49, 0.25, 0]} color="#efe4d0" edges={false} />
+      <MaterialBox w={1.15} h={0.4} d={1} position={[-1.3, 0.3, -0.8]} color="#c4a36a" edges={false} />
     </group>
   );
 }
@@ -288,25 +289,6 @@ export function Building() {
     wires.current = nextWires;
   }, []);
 
-  useEffect(() => {
-    if (prefersReducedMotion()) {
-      scene.build = 1;
-      return;
-    }
-    scene.build = 0;
-    const built = { value: 0 };
-    const tween = gsap.to(built, {
-      value: 1,
-      duration: 7.4,
-      ease: "none",
-      onUpdate: () => {
-        scene.build = built.value;
-      },
-    });
-    return () => {
-      tween.kill();
-    };
-  }, []);
 
   useFrame(() => {
     syncScene();

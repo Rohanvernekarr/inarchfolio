@@ -1,23 +1,23 @@
 export const services = [
   {
     number: "01",
-    title: "House design",
-    text: "Plans, sections, and elevations. The court, the rooms, and where the structure sits on the plot.",
+    title: "Architecture",
+    text: "Residential and commercial planning, 2D floor plans, space planning, elevations and working drawings.",
   },
   {
     number: "02",
-    title: "Interiors",
-    text: "Materials, joinery, lighting, and fixed furniture, drawn with the rest of the house.",
+    title: "Structural design",
+    text: "Structural layouts, foundation design, reinforcement details and coordinated technical drawings.",
   },
   {
     number: "03",
-    title: "Site build",
-    text: "From the foundation to handover. We stay on site and build from those drawings.",
+    title: "Interior design",
+    text: "Living rooms, kitchens, wardrobes, bedrooms, lighting and 3D interior visualization.",
   },
   {
     number: "04",
-    title: "Before you build",
-    text: "The plot, the local rules, and a first cost, so you know the house can be built.",
+    title: "Project support",
+    text: "3D elevations, construction consultancy and project execution support, subject to agreed scope.",
   },
 ] as const;
 
@@ -43,12 +43,16 @@ export const processStages = [
 ] as const;
 
 export const contactChannels = [
-  { label: "Instagram", href: "https://instagram.com/" },
-  { label: "Message", href: "mailto:?subject=A%20project%20for%20INARCH" },
-  { label: "Email", href: "mailto:" },
+  { label: "Instagram", href: "https://www.instagram.com/_inarch_/" },
+  { label: "WhatsApp", href: "https://wa.me/919483185207" },
+  { label: "Email", href: "mailto:inarchstructuresandstudio@gmail.com?subject=Project%20enquiry%20for%20InArch" },
 ] as const;
 
 export const nav = [
+  { href: "/#opening", label: "Home" },
+  { href: "/#about", label: "About us" },
   { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Projects" },
+  { href: "/#packages", label: "Packages" },
   { href: "/#contact", label: "Contact" },
 ] as const;

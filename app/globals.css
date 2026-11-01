@@ -15,6 +15,51 @@ html {
   scroll-behavior: auto;
 }
 
+.site-header {
+  transition: opacity 0.45s ease;
+}
+
+
+
+body:has(#opening[data-intro="playing"]) .site-header {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-letter {
+  display: inline-block;
+  background: linear-gradient(110deg, #f5f2eb 30%, #d97736 46%, #f0d5a2 50%, #f5f2eb 64%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro-rule {
+  display: block;
+  width: min(56vw, 540px);
+  height: 1px;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, transparent, #d97736 50%, transparent);
+  transform-origin: center;
+}
+
+.intro-spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #d97736;
+  box-shadow: 0 0 10px 3px rgba(217, 119, 54, 0.45);
+  opacity: 0;
+}
+
+.intro-spark:nth-last-child(4) { left: 18%; top: 38%; }
+.intro-spark:nth-last-child(3) { left: 38%; top: 60%; }
+.intro-spark:nth-last-child(2) { left: 65%; top: 33%; }
+.intro-spark:nth-last-child(1) { left: 82%; top: 58%; }
+
 #studio,
 #services,
 #work,
@@ -49,8 +94,16 @@ body {
 }
 
 .page-sheet {
-  transform-origin: center top;
   box-shadow: 0 -16px 28px rgba(0, 0, 0, 0.28);
+}
+
+#offerings {
+  perspective: 1400px;
+}
+
+#offerings .page-sheet {
+  box-shadow: -24px 0 48px rgba(0, 0, 0, 0.42);
+  backface-visibility: hidden;
 }
 
 .grain {
@@ -76,7 +129,7 @@ body {
   bottom: 0;
   left: 0;
   height: 1px;
-  background: #e10600;
+  background: #d97736;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);

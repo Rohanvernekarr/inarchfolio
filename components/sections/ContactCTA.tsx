@@ -63,7 +63,8 @@ export function ContactCTA() {
       <h2 className="contact-word px-[2vw] text-center font-display text-[26vw] leading-[0.78] font-bold tracking-[-0.07em] whitespace-nowrap text-[#e10600]">
         CONTACT
       </h2>
-      <ul className="mt-10 flex items-center justify-center gap-10 md:mt-14 md:gap-16">
+      <p className="mt-5 px-5 text-center text-sm text-stone">Have a project in mind? Let’s design it together.</p>
+      <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 px-5 md:mt-14 md:gap-16">
         {contactChannels.map((channel) => (
           <li key={channel.label}>
             <a
@@ -77,6 +78,7 @@ export function ContactCTA() {
           </li>
         ))}
       </ul>
+
     </section>
   );
 }
