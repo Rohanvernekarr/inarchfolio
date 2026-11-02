@@ -1,17 +1,36 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+  --palette-obsidian: #0a0a0a;
+  --palette-concrete: #202020;
+  --palette-stone: #b7b0a5;
+  --palette-brass: #d6b77a;
+  --palette-ivory: #ebe6dc;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --palette-obsidian: #f5f2eb;
+  --palette-concrete: #e8e2d7;
+  --palette-stone: #484239;
+  --palette-brass: #684414;
+  --palette-ivory: #171512;
+  --palette-line: #584f43;
+}
+
 @theme inline {
-  --color-obsidian: #0a0a0a;
-  --color-concrete: #202020;
-  --color-stone: #b7b0a5;
-  --color-brass: #d6b77a;
-  --color-ivory: #ebe6dc;
+  --color-obsidian: var(--palette-obsidian);
+  --color-concrete: var(--palette-concrete);
+  --color-stone: var(--palette-stone);
+  --color-brass: var(--palette-brass);
+  --color-ivory: var(--palette-ivory);
   --font-sans: var(--font-inter);
   --font-display: var(--font-space);
 }
 
 html {
-  background: #0a0a0a;
+  background: var(--palette-obsidian);
   scroll-behavior: auto;
 }
 
@@ -19,6 +38,64 @@ html {
   transition: opacity 0.45s ease;
 }
 
+.theme-switch {
+  border-color: var(--palette-brass);
+  background: var(--palette-obsidian);
+  color: var(--palette-ivory);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-switch:hover {
+  background: var(--palette-brass);
+  color: var(--palette-obsidian);
+}
+
+.theme-switch-light {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-switch-dark {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-switch-light {
+  display: inline;
+}
+
+:root[data-theme="light"] .site-header {
+  background: rgba(245, 242, 235, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+:root[data-theme="light"] .hero-backdrop {
+  background: var(--palette-obsidian);
+}
+
+:root[data-theme="light"] .hero-backdrop > p {
+  color: color-mix(in srgb, var(--palette-ivory) 16%, transparent);
+}
+
+:root[data-theme="light"] .hero-content {
+  background: linear-gradient(to top, #f5f2eb 0%, rgba(245, 242, 235, 0.93) 29%, transparent 72%);
+}
+
+:root[data-theme="light"] .hero-content h1 {
+  color: var(--palette-ivory);
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .hero-content p {
+  color: var(--palette-stone);
+}
+
+:root[data-theme="light"] .hero-content > p {
+  color: var(--palette-brass);
+}
+
+:root[data-theme="light"] .assembly-copy {
+  background: var(--palette-obsidian);
+  box-shadow: 0 0 0 16px var(--palette-obsidian), 0 0 64px 30px rgba(245, 242, 235, 0.75);
+}
 
 
 body:has(#opening[data-intro="playing"]) .site-header {
@@ -68,14 +145,76 @@ body:has(#opening[data-intro="playing"]) .site-header {
 }
 
 body {
-  background: #0a0a0a;
-  color: #ebe6dc;
+  background: var(--palette-obsidian);
+  color: var(--palette-ivory);
   font-family: var(--font-inter), sans-serif;
 }
 
 ::selection {
-  background: #d6b77a;
-  color: #0a0a0a;
+  background: var(--palette-brass);
+  color: var(--palette-obsidian);
+}
+
+
+:root[data-theme="light"] .service-panel:hover {
+  background: var(--palette-concrete);
+}
+
+:root[data-theme="light"] .intro-letter {
+  background-image: linear-gradient(110deg, #211e19 30%, #ad6626 46%, #79521c 50%, #211e19 64%);
+}
+
+:root[data-theme="light"] .blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(104, 68, 20, 0.24) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(104, 68, 20, 0.24) 1px, transparent 1px);
+}
+
+:root[data-theme="light"] :is(
+  [class~="border-white/10"],
+  [class~="border-white/15"],
+  [class~="border-white/25"],
+  [class~="md:border-white/10"],
+  [class~="in-data-[theme=light]:border-ivory/15"],
+  [class~="in-data-[theme=light]:border-ivory/20"],
+  [class~="in-data-[theme=light]:border-ivory/25"]
+) {
+  border-color: var(--palette-line);
+}
+
+:root[data-theme="light"] [class~="bg-white/15"] {
+  background-color: var(--palette-line);
+}
+
+:root[data-theme="light"] .service-num {
+  color: color-mix(in srgb, var(--palette-ivory) 17%, transparent);
+}
+
+:root[data-theme="light"] .project-copy > p,
+:root[data-theme="light"] .footer-word {
+  color: color-mix(in srgb, var(--palette-ivory) 26%, transparent);
+}
+
+:root[data-theme="light"] .hero-step .step-title,
+:root[data-theme="light"] .hero-step p.text-stone {
+  color: var(--palette-stone);
+}
+
+:root[data-theme="light"] .hero-step.is-on .step-title,
+:root[data-theme="light"] .hero-step.is-current .step-note {
+  color: var(--palette-ivory);
+}
+
+:root[data-theme="light"] .hero-step.is-current .step-title {
+  color: var(--palette-brass);
+}
+
+:root[data-theme="light"] .service-panel {
+  box-shadow: inset 0 0 0 1px var(--palette-line);
+}
+
+:root[data-theme="light"] [class~="in-data-[theme=light]:bg-ivory/[0.04]"] {
+  background-color: color-mix(in srgb, var(--palette-ivory) 6%, var(--palette-obsidian));
 }
 
 .blueprint-grid {

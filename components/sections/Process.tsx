@@ -28,7 +28,7 @@ export function Process() {
       <div className="grid md:grid-cols-2">
         <div className="relative hidden md:block">
           <div className="sticky top-0 flex h-screen items-center px-10">
-            <div className="relative h-[68vh] w-full overflow-hidden border border-white/10 bg-concrete">
+            <div className="relative h-[68vh] w-full overflow-hidden border border-white/10 bg-concrete in-data-[theme=light]:border-ivory/15">
               <Plate stage={active} />
             </div>
           </div>
@@ -45,12 +45,12 @@ export function Process() {
               <article
                 key={stage.id}
                 data-stage={index}
-                className="border-t border-white/10 py-16 md:min-h-[70vh] md:py-24"
+                className="border-t border-white/10 py-16 in-data-[theme=light]:border-ivory/15 md:min-h-[70vh] md:py-24"
               >
                 <p className="text-[11px] tracking-[0.28em] text-brass uppercase">{stage.number}</p>
                 <h3 className="mt-4 font-display text-3xl text-ivory md:text-5xl">{stage.title}</h3>
                 <p className="mt-5 max-w-md text-sm leading-7 text-stone md:text-base">{stage.text}</p>
-                <div className="mt-8 h-56 border border-white/10 md:hidden">
+                <div className="mt-8 h-56 border border-white/10 in-data-[theme=light]:border-ivory/15 md:hidden">
                   <Plate stage={index} />
                 </div>
               </article>
@@ -68,7 +68,7 @@ function Plate({ stage }: { stage: number }) {
       <div className="flex h-full items-end bg-[#171717] p-8">
         <div className="flex w-full items-end gap-2">
           {[40, 68, 100, 82, 54].map((height) => (
-            <div key={height} className="flex-1 bg-stone/80" style={{ height: `${height}%` }} />
+            <div key={height} className="flex-1 bg-stone/80 in-data-[theme=light]:bg-[#b7b0a5]/80" style={{ height: `${height}%` }} />
           ))}
         </div>
       </div>
@@ -79,7 +79,7 @@ function Plate({ stage }: { stage: number }) {
     return (
       <div className="relative h-full bg-[#10100f]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(214,183,122,0.28),transparent_42%),linear-gradient(160deg,#2a2826,#0c0c0c_70%)]" />
-        <div className="absolute bottom-8 left-8 text-[11px] tracking-[0.28em] text-brass uppercase">
+        <div className="absolute bottom-8 left-8 text-[11px] tracking-[0.28em] text-brass uppercase in-data-[theme=light]:text-[#d6b77a]">
           Built work
         </div>
       </div>

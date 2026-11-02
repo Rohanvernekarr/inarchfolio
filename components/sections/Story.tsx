@@ -56,7 +56,7 @@ function Page({
       style={{ zIndex: index + 2 }}
     >
       <div
-        className={`page-sheet flex min-h-svh flex-col bg-obsidian ${index === 1 ? "border-t border-brass/30" : ""} ${index === 3 ? "border-l border-brass/30" : ""} ${bare ? "justify-center px-0 py-0" : "justify-start px-5 pt-20 pb-10 md:px-10 md:pt-28 md:pb-16"}`}
+        className={`page-sheet flex min-h-svh flex-col bg-obsidian ${index >= 1 && index <= 3 ? "md:min-h-[135svh] md:justify-center" : ""} ${index === 1 ? "min-h-[120svh] border-t border-brass/30" : ""} ${index === 3 ? "border-l border-brass/30" : ""} ${bare ? "justify-center px-0 py-0" : "justify-start px-5 pt-20 pb-10 md:px-10 md:pt-28 md:pb-16"}`}
       >
         {bare ? null : (
           <p className="mb-8 text-[11px] tracking-[0.32em] text-stone uppercase">
@@ -161,7 +161,7 @@ export function Story() {
   return (
     <div ref={rootRef} className="relative">
       <Page index={page++} id="services" bare>
-        <div className="grid min-h-svh grid-cols-1 md:grid-cols-2">
+        <div className="grid min-h-svh grid-cols-1 md:min-h-[125svh] md:grid-cols-2">
           {services.map((service, index) => (
             <article
               key={service.number}

@@ -148,7 +148,7 @@ export function Hero() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-obsidian" aria-hidden>
+      <div className="hero-backdrop pointer-events-none fixed inset-0 z-0 overflow-hidden bg-obsidian" aria-hidden>
         <p className="absolute inset-x-0 top-[18%] px-[5vw] select-none font-display text-[13vw] leading-[0.9] font-bold tracking-[-0.08em] text-white/[0.12] md:top-[15%] md:px-[4vw] md:text-[11vw] md:text-white/[0.09]"><span className="block whitespace-nowrap">SHAPING</span><span className="block whitespace-nowrap">WHAT’S NEXT</span></p>
         <div className="absolute inset-0"><ExperienceCanvas /></div>
       </div>
@@ -175,7 +175,7 @@ export function Hero() {
         </svg>
 
 
-        <div ref={heroRef} className="absolute inset-0 flex flex-col justify-end px-5 pb-16 md:px-10 md:pb-20">
+        <div ref={heroRef} className="hero-content absolute inset-0 flex flex-col justify-end px-5 pb-16 md:px-10 md:pb-20">
           <p className="overflow-hidden text-[11px] tracking-[0.38em] text-brass uppercase">
             <span className="rise inline-block">Architecture · Structural engineering · Interior design</span>
           </p>
@@ -219,7 +219,7 @@ export function Hero() {
           ref={assemblyRef}
           className="pointer-events-none absolute inset-0 flex items-end px-5 pb-16 opacity-0 md:px-10 md:pb-20"
         >
-          <div className="max-w-xl">
+          <div className="assembly-copy max-w-xl">
             <p className="asm-line text-[11px] tracking-[0.38em] text-brass uppercase">In order</p>
             <h2 className="mt-4 font-display text-4xl leading-[0.95] text-ivory md:text-6xl">
               {"Thoughtful design. Technical precision. Inspired spaces.".split(" ").map((word, index) => (

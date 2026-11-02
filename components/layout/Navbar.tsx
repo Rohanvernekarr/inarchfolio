@@ -18,6 +18,32 @@ function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, href: strin
   history.pushState(null, "", `/#${id}`);
 }
 
+function ThemeButton() {
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    if (next === "light") root.dataset.theme = "light";
+    else delete root.dataset.theme;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // The current page can still switch themes without storage access.
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label="Switch between light and dark themes"
+      className="theme-switch inline-flex h-10 shrink-0 items-center border px-3 text-[11px] font-semibold tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+    >
+      <span className="theme-switch-dark">☀ Light mode</span>
+      <span className="theme-switch-light">☾ Dark mode</span>
+    </button>
+  );
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const reduced = useReducedMotion();
@@ -50,15 +76,18 @@ export function Navbar() {
             </a>
           ))}
         </nav>
-        <button
-          type="button"
-          className="text-[11px] tracking-[0.28em] text-stone uppercase md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
+        <div className="flex items-center gap-3 md:gap-5">
+          <ThemeButton />
+          <button
+            type="button"
+            className="text-[11px] tracking-[0.28em] text-stone uppercase md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
       <AnimatePresence>
         {open ? (
@@ -71,6 +100,7 @@ export function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
           >
+            <div className="absolute top-5 left-6"><ThemeButton /></div>
             <button
               type="button"
               className="absolute top-5 right-5 text-[11px] tracking-[0.28em] text-stone uppercase"

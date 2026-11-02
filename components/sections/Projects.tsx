@@ -47,11 +47,11 @@ export function Projects() {
         </Link>
       </div>
       {projects.map((project) => (
-        <article key={project.slug} className="project-chapter border-t border-white/10">
+        <article key={project.slug} className="project-chapter border-t border-white/10 in-data-[theme=light]:border-ivory/15">
           <Link href={`/projects/${project.slug}`} className="grid md:grid-cols-2">
             <ProjectScene silhouette={project.silhouette} label={project.number} />
             <div className="project-copy flex flex-col justify-between px-5 py-10 md:px-12 md:py-16">
-              <p className="font-display text-6xl text-white/15 md:text-8xl">{project.number}</p>
+              <p className="font-display text-6xl text-white/15 in-data-[theme=light]:text-ivory/15 md:text-8xl">{project.number}</p>
               <div>
                 <h3 className="font-display text-4xl text-ivory md:text-6xl">{project.name}</h3>
                 <p className="mt-4 max-w-md text-sm leading-6 text-stone md:text-base">{project.summary}</p>

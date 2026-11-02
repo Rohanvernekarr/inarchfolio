@@ -28,11 +28,11 @@ export function BriefForm({
   }, [dialog, onClose]);
 
   const box = dialog
-    ? "mt-2 w-full border border-white/15 bg-obsidian px-3 py-3 text-sm text-ivory outline-none"
-    : "mt-2 w-full border border-white/25 bg-white/[0.04] px-3 py-3 text-base text-ivory outline-none placeholder:text-stone focus:border-brass";
+    ? "mt-2 w-full border border-white/15 bg-obsidian px-3 py-3 text-sm text-ivory outline-none in-data-[theme=light]:border-ivory/20"
+    : "mt-2 w-full border border-white/25 bg-white/[0.04] px-3 py-3 text-base text-ivory outline-none placeholder:text-stone focus:border-brass in-data-[theme=light]:border-ivory/25 in-data-[theme=light]:bg-ivory/[0.04]";
 
   const fields = sent ? (
-    <p className="border border-white/15 bg-white/[0.04] px-5 py-6 text-base leading-7 text-ivory">
+    <p className="border border-white/15 bg-white/[0.04] px-5 py-6 text-base leading-7 text-ivory in-data-[theme=light]:border-ivory/20 in-data-[theme=light]:bg-ivory/[0.04]">
       Thank you. Your brief is saved on this page only. It is not emailed yet.
     </p>
   ) : (
@@ -89,7 +89,7 @@ export function BriefForm({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="w-full max-w-lg border border-white/10 bg-concrete p-6 md:p-8"
+        className="w-full max-w-lg border border-white/10 bg-concrete p-6 in-data-[theme=light]:border-ivory/15 md:p-8"
       >
         <div className="flex items-start justify-between gap-6">
           <h2 id={titleId} className="font-display text-3xl text-ivory">
