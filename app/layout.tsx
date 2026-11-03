@@ -4,6 +4,7 @@ import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Grain } from "@/components/layout/Grain";
 import { Navbar } from "@/components/layout/Navbar";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 
 const sans = Inter({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full bg-obsidian font-sans text-ivory">
         <Grain />
+        <SmoothScroll />
         <Navbar />
         {children}
         <Footer />

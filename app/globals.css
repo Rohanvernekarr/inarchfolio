@@ -147,8 +147,12 @@ body {
 }
 
 
-:root[data-theme="light"] .service-panel:hover {
+:root[data-theme="light"] .service-panel[data-scroll-active="true"] {
   background: var(--palette-concrete);
+}
+
+:root[data-theme="light"] .service-panel[data-scroll-active="true"] .service-num {
+  color: #c71712;
 }
 
 :root[data-theme="light"] .intro-letter {
@@ -308,11 +312,11 @@ body {
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.service-panel:hover {
+.service-panel[data-scroll-active="true"] {
   background: #121212;
 }
 
-.service-panel:hover::before {
+.service-panel[data-scroll-active="true"]::before {
   transform: scaleY(1);
 }
 
@@ -320,7 +324,7 @@ body {
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s ease;
 }
 
-.service-panel:hover .service-num {
+.service-panel[data-scroll-active="true"] .service-num {
   color: rgba(225, 6, 0, 0.42);
   transform: translate3d(-2vw, -1vh, 0);
 }
@@ -329,7 +333,7 @@ body {
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.service-panel:hover h2 {
+.service-panel[data-scroll-active="true"] h2 {
   transform: translateX(10px);
 }
 
@@ -355,5 +359,12 @@ body {
   .marquee,
   .marquee-reverse {
     animation: none;
+  }
+
+  .service-panel,
+  .service-panel::before,
+  .service-panel .service-num,
+  .service-panel h2 {
+    transition: none;
   }
 }

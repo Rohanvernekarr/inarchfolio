@@ -53,7 +53,7 @@ function Page({
     <div
       id={id}
       className={`page-frame min-h-svh ${index === 0 || index === 2 ? "relative" : "sticky top-0"} ${index === 3 ? "overflow-x-clip" : ""}`}
-      style={{ zIndex: index + 2 }}
+      style={{ zIndex: id === "services" ? PAGE_COUNT + 2 : index + 2 }}
     >
       <div
         className={`page-sheet flex min-h-svh flex-col bg-obsidian ${index >= 1 && index <= 3 ? "md:min-h-[135svh] md:justify-center" : ""} ${index === 1 ? "min-h-[120svh] border-t border-brass/30" : ""} ${index === 3 ? "border-l border-brass/30" : ""} ${bare ? "justify-center px-0 py-0" : "justify-start px-5 pt-20 pb-10 md:px-10 md:pt-28 md:pb-16"}`}
@@ -100,35 +100,50 @@ export function Story() {
     const root = rootRef.current;
     if (!root) return;
     const servicesPage = root.querySelector<HTMLElement>("#services");
-    const aboutPage = root.querySelector<HTMLElement>("#about");
-    const aboutSheet = aboutPage?.querySelector<HTMLElement>(".page-sheet");
+    if (!servicesPage) return;
+    const panels = [...servicesPage.querySelectorAll<HTMLElement>(".service-panel")];
+    let activeIndex = -1;
+
+    const update = () => {
+      const viewport = window.innerHeight;
+      const section = servicesPage.getBoundingClientRect();
+      const desktop = window.matchMedia("(min-width: 768px)").matches;
+      let next = -1;
+      if (section.top < viewport * 0.8 && section.bottom > viewport * 0.2) {
+        panels.forEach((panel, index) => {
+          const threshold = desktop ? [0.8, 0.4, 0.75, 0.25][index] : 0.7;
+          if (panel.getBoundingClientRect().top < viewport * threshold) next = index;
+        });
+      }
+      if (activeIndex === next) return;
+      activeIndex = next;
+      panels.forEach((panel, index) => {
+        if (index === next) panel.dataset.scrollActive = "true";
+        else delete panel.dataset.scrollActive;
+      });
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      panels.forEach((panel) => delete panel.dataset.scrollActive);
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
     const expertisePage = root.querySelector<HTMLElement>("#expertise");
     const offeringsPage = root.querySelector<HTMLElement>("#offerings");
     const offeringsSheet = offeringsPage?.querySelector<HTMLElement>(".page-sheet");
-    if (!servicesPage || !aboutPage || !aboutSheet || !expertisePage || !offeringsPage || !offeringsSheet || prefersReducedMotion()) return;
+    if (!expertisePage || !offeringsPage || !offeringsSheet || prefersReducedMotion()) return;
     registerGsap();
 
     const context = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: servicesPage,
-        start: "bottom bottom",
-        end: "+=100%",
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-      });
-
-      gsap.fromTo(aboutSheet, { y: () => Math.min(window.innerHeight * 0.3, 240) }, {
-        y: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: aboutPage,
-          start: "top bottom",
-          end: "top top",
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-        },
-      });
 
       ScrollTrigger.create({
         trigger: expertisePage,
