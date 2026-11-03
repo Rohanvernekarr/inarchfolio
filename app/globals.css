@@ -1,15 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
-  --palette-obsidian: #0a0a0a;
-  --palette-concrete: #202020;
-  --palette-stone: #b7b0a5;
-  --palette-brass: #d6b77a;
-  --palette-ivory: #ebe6dc;
-}
-
-:root[data-theme="light"] {
   color-scheme: light;
   --palette-obsidian: #f5f2eb;
   --palette-concrete: #e8e2d7;
@@ -38,21 +29,6 @@ html {
   transition: opacity 0.45s ease;
 }
 
-.theme-switch {
-  color: var(--palette-brass);
-}
-
-.theme-switch-light {
-  display: none;
-}
-
-:root[data-theme="light"] .theme-switch-dark {
-  display: none;
-}
-
-:root[data-theme="light"] .theme-switch-light {
-  display: inline;
-}
 
 :root[data-theme="light"] .site-header {
   background: rgba(245, 242, 235, 0.96);
@@ -97,7 +73,8 @@ body:has(#opening[data-intro="playing"]) .site-header {
 
 .intro-letter {
   display: inline-block;
-  background: linear-gradient(110deg, #f5f2eb 30%, #d97736 46%, #f0d5a2 50%, #f5f2eb 64%);
+  opacity: 0;
+  background: linear-gradient(110deg, var(--intro-ink, #00777c) 30%, #008f95 46%, #f38b19 50%, var(--intro-ink, #00777c) 64%);
   background-size: 300% 100%;
   background-position: 100% 0;
   background-clip: text;
@@ -106,11 +83,16 @@ body:has(#opening[data-intro="playing"]) .site-header {
 
 .intro-rule {
   display: block;
+  opacity: 0;
   width: min(56vw, 540px);
   height: 1px;
   margin-top: 1.5rem;
-  background: linear-gradient(90deg, transparent, #d97736 50%, transparent);
+  background: linear-gradient(90deg, transparent, #008f95 35%, #f38b19 65%, transparent);
   transform-origin: center;
+}
+
+.intro-subtitle {
+  opacity: 0;
 }
 
 .intro-spark {
@@ -155,8 +137,8 @@ body {
   color: #c71712;
 }
 
-:root[data-theme="light"] .intro-letter {
-  background-image: linear-gradient(110deg, #211e19 30%, #ad6626 46%, #79521c 50%, #211e19 64%);
+.intro-letter:nth-child(n + 4) {
+  --intro-ink: #b9580b;
 }
 
 :root[data-theme="light"] .blueprint-grid {

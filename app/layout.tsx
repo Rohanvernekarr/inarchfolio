@@ -30,10 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try { if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light"; } catch (error) { /* Storage may be unavailable. */ }` }} />
-      </head>
+    <html lang="en" data-theme="light" className={`${sans.variable} ${display.variable} h-full antialiased`}>
       <body className="min-h-full bg-obsidian font-sans text-ivory">
         <Grain />
         <SmoothScroll />
