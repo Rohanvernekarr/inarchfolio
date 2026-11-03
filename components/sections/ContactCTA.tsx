@@ -59,7 +59,7 @@ export function ContactCTA() {
   }, []);
 
   return (
-    <section ref={ref} id="contact" className="relative flex h-full flex-col items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative flex h-full flex-col items-center justify-center overflow-hidden">
       <h2 className="contact-word px-[2vw] text-center font-display text-[26vw] leading-[0.78] font-bold tracking-[-0.07em] whitespace-nowrap text-[#e10600]">
         CONTACT
       </h2>

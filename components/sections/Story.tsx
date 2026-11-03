@@ -254,7 +254,7 @@ export function Story() {
         <div className="flex min-h-full flex-col justify-center py-8"><Heading label="Client testimonials / 08" title="The best stories come from our clients." /><div className="max-w-3xl border-l-2 border-brass pl-6 md:pl-10"><p className="font-display text-3xl leading-tight text-ivory md:text-5xl">We’re making space for genuine feedback from the people we work with.</p><p className="mt-6 text-sm leading-7 text-stone">Verified client reviews will appear here when available. No sample or fabricated testimonials.</p><a className="contact-link mt-6 text-xs tracking-[.2em] text-ivory uppercase" href={`mailto:${email}?subject=Feedback%20for%20InArch`}>Share your experience ↗</a></div></div>
       </Page>
 
-      <Page index={page++} bare>
+      <Page index={page++} id="contact" bare>
         <ContactCTA />
       </Page>
     </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { nav } from "@/data/studio";
@@ -36,10 +37,15 @@ function ThemeButton() {
       type="button"
       onClick={toggleTheme}
       aria-label="Switch between light and dark themes"
-      className="theme-switch inline-flex h-10 shrink-0 items-center border px-3 text-[11px] font-semibold tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+      className="theme-switch inline-flex size-9 shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
     >
-      <span className="theme-switch-dark">☀ Light mode</span>
-      <span className="theme-switch-light">☾ Dark mode</span>
+      <svg className="theme-switch-dark size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+      </svg>
+      <svg className="theme-switch-light size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z" />
+      </svg>
     </button>
   );
 }
@@ -49,6 +55,7 @@ export function Navbar() {
   const reduced = useReducedMotion();
 
   return (
+    <>
     <header className="site-header fixed inset-x-0 top-0 z-40">
       <div className="flex items-center justify-between px-5 py-5 md:px-10">
         <Link
@@ -89,47 +96,53 @@ export function Navbar() {
           </button>
         </div>
       </div>
+    </header>
+    {typeof document !== "undefined" ? createPortal(
       <AnimatePresence>
         {open ? (
           <motion.nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="fixed inset-0 z-40 flex flex-col justify-end overflow-y-auto bg-obsidian/95 px-6 pb-10 pt-20 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-[100] flex flex-col overflow-y-auto bg-obsidian px-6 pb-8 md:hidden"
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
           >
-            <div className="absolute top-5 left-6"><ThemeButton /></div>
-            <button
-              type="button"
-              className="absolute top-5 right-5 text-[11px] tracking-[0.28em] text-stone uppercase"
-              onClick={() => setOpen(false)}
-            >
-              Close
-            </button>
-            {nav.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={reduced ? false : { y: 24, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.05 * index, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            <div className="sticky top-0 z-10 flex items-center justify-between bg-obsidian py-5">
+              <ThemeButton />
+              <button
+                type="button"
+                className="text-[11px] tracking-[0.28em] text-stone uppercase"
+                onClick={() => setOpen(false)}
               >
-                <a
-                  href={item.href}
-                  className="block py-2 font-display text-4xl text-ivory sm:py-3 sm:text-5xl"
-                  onClick={(event) => {
-                    scrollToSection(event, item.href);
-                    setOpen(false);
-                  }}
+                Close
+              </button>
+            </div>
+            <div className="pt-6">
+              {nav.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={reduced ? false : { y: 24, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.05 * index, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {item.label}
-                </a>
-              </motion.div>
-            ))}
+                  <a
+                    href={item.href}
+                    className="block py-2 font-display text-4xl text-ivory sm:py-3 sm:text-5xl"
+                    onClick={(event) => {
+                      scrollToSection(event, item.href);
+                      setOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                </motion.div>
+              ))}
+            </div>
           </motion.nav>
         ) : null}
-      </AnimatePresence>
-    </header>
+      </AnimatePresence>, document.body) : null}
+    </>
   );
 }

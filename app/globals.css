@@ -39,15 +39,7 @@ html {
 }
 
 .theme-switch {
-  border-color: var(--palette-brass);
-  background: var(--palette-obsidian);
-  color: var(--palette-ivory);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.theme-switch:hover {
-  background: var(--palette-brass);
-  color: var(--palette-obsidian);
+  color: var(--palette-brass);
 }
 
 .theme-switch-light {
@@ -64,7 +56,6 @@ html {
 
 :root[data-theme="light"] .site-header {
   background: rgba(245, 242, 235, 0.96);
-  backdrop-filter: blur(12px);
 }
 
 :root[data-theme="light"] .hero-backdrop {
